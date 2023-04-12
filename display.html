@@ -5,60 +5,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stock Trading Display Page</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="display.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
   <style>
-    
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #7F7FD5, #86A8E7, #91EAE4);
+      background-size: 600% 600%;
+      animation: gradient 16s ease infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      padding-top: 50px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #FFF;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      animation: fadeInDown 1s;
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    #chart {
+      max-width: 100%;
+      height: 500px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
   </style>
+  <link rel="stylesheet" href="mainpage.css">
 </head>
 <body>
+  <nav class="navbar">
+    <a href="#" class="website-name">Trading System</a>
+    <a href="trade.html">Trade</a>
+    <a href="profile.html">Profile</a>
+    <a href="sign_in.html">Sign In</a>
+    <a href="sign_up.html">Sign Up</a>
+</nav>
   <div class="container">
     <h1><i class="fa fa-line-chart" aria-hidden="true"></i> US Dollar</h1>
     <div id="chart"></div>
   </div>
+  <footer class="footer">
+    <a href="#">Cloud Computing 6998 Project</a>
+</footer>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/stock.js"></script>
   <script>
     async function fetchData() {
-  const response = await fetch('https://jks1yxo910.execute-api.us-east-1.amazonaws.com/demo/display?start_time=2023-04-03');
-  const data = await response.json();
-  const sortedData = data.results.map(item => [new Date(item.update_time).getTime(), parseFloat(item.forex_rate)]);
-  sortedData.sort((a, b) => a[0] - b[0]);
-  return sortedData;
-}
+      const response = await fetch('https://jks1yxo910.execute-api.us-east-1.amazonaws.com/demo/display?start_time=2023-04-03');
+      const data = await response.json();
+      const sortedData = data.results.map(item => [new Date(item.update_time).getTime(), parseFloat(item.forex_rate)]);
+      sortedData.sort((a, b) => a[0] - b[0]);
+      return sortedData;
+    }
 
     async function initChart() {
       const data = await fetchData();
-      // rest of your chart setup code
-      console.log(data)
 
       Highcharts.stockChart('chart', {
-        series: [
-          {
-            name: 'US Dollar',
-            data,
-            lineWidth: 3,
-      color: Highcharts.getOptions().colors[0],
-      fillColor: {
-      linearGradient: [0, 0, 0, 300],
-      stops: [
-      [0, Highcharts.getOptions().colors[0]],
-      [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')],
-      ],
-      },
-      marker: {
-      enabled: true,
-      fillColor: Highcharts.getOptions().colors[0],
-      lineColor: Highcharts.getOptions().colors[0],
-      },
-      tooltip: {
-      valueDecimals: 2,
-      },},
-        ],
-        // rest of your chart options
-      });
-    }
-
-    initChart();
-  </script>
+chart: {
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderRadius: 10,
+},
+xAxis: {
+crosshair: true,
+},
+yAxis: {
+crosshair: true,
+},
+tooltip: {
+backgroundColor: 'rgba(0, 0, 0, 0.85)',
+style: {
+color: '#F0F0F0'
+},
+valueDecimals: 2,
+},
+plotOptions: {
+series: {
+animation: {
+duration: 1000,
+},
+states: {
+hover: {
+lineWidthPlus: 3
+},
+inactive: {
+opacity: 1
+}
+},
+marker: {
+enabled: true,
+fillColor: Highcharts.getOptions().colors[0],
+lineColor: Highcharts.getOptions().colors[0],
+radius: 3,
+states: {
+hover: {
+radius: 5,
+lineWidth: 2
+}
+}
+},
+color: 'cyan' // set the color to cyan
+},
+},
+series: [
+{
+name: 'US Dollar',
+data,
+lineWidth: 3,
+color: Highcharts.getOptions().colors[0],
+fillColor: {
+linearGradient: [0, 0, 0, 300],
+stops: [
+[0, 'cyan'], // set the color to cyan
+[1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')],
+],
+},
+},
+],
+});
+}
+initChart();
+</script>
 </body>
 </html>
