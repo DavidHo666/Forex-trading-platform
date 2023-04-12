@@ -155,16 +155,17 @@ fetch('https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/index')
 };
 
 function updateBalance() {
-  usdBalanceSpan.textContent = userBalance["USD"].toFixed(2);
-  eurBalanceSpan.textContent = userBalance["EUR"].toFixed(2);
-  jpyBalanceSpan.textContent = userBalance["JPY"].toFixed(2);
-  cnyBalanceSpan.textContent = userBalance["CNY"].toFixed(2);
-  audBalanceSpan.textContent = userBalance["AUD"].toFixed(2);
-  cadBalanceSpan.textContent = userBalance["CAD"].toFixed(2);
-  chfBalanceSpan.textContent = userBalance["CHF"].toFixed(2);
-  gbpBalanceSpan.textContent = userBalance["GBP"].toFixed(2);
-  hkdBalanceSpan.textContent = userBalance["HKD"].toFixed(2);
+  usdBalanceSpan.textContent = parseFloat(userBalance["USD"]).toFixed(2);
+  eurBalanceSpan.textContent = parseFloat(userBalance["EUR"]).toFixed(2);
+  jpyBalanceSpan.textContent = parseFloat(userBalance["JPY"]).toFixed(2);
+  cnyBalanceSpan.textContent = parseFloat(userBalance["CNY"]).toFixed(2);
+  audBalanceSpan.textContent = parseFloat(userBalance["AUD"]).toFixed(2);
+  cadBalanceSpan.textContent = parseFloat(userBalance["CAD"]).toFixed(2);
+  chfBalanceSpan.textContent = parseFloat(userBalance["CHF"]).toFixed(2);
+  gbpBalanceSpan.textContent = parseFloat(userBalance["GBP"]).toFixed(2);
+  hkdBalanceSpan.textContent = parseFloat(userBalance["HKD"]).toFixed(2);
 }
+
 
 function updateToCurrencyOptions() {
   const toCurrencyOptions = currencyOptions
