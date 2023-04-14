@@ -6,14 +6,13 @@
     <title>Currency Information</title>
     <link rel="stylesheet" href="mainpage.css">
 </head>
-<body>
-    <nav class="navbar">
-        <a href="#" class="website-name">Trading System</a>
-        <a href="trade.html">Trade</a>
-        <a href="profile.html">Profile</a>
-        <a href="sign_in.html">Sign In</a>
-        <a href="sign_up.html">Sign Up</a>
-    </nav>
+<nav class="navbar">
+    <a href="#" class="website-name">Trading System</a>
+    <a href="trading.html">Trade</a>
+    <a href="profile.html">Profile</a>
+    <a href="signin.html">Sign In</a>
+    <a href="signup.html">Sign Up</a>
+</nav>
     <table id="currency-table">
         <tr>
             <th>Name</th>
@@ -34,7 +33,10 @@
             const currencyData = response.data.rates;
             Object.entries(currencyData).forEach(([currencyName, currency]) => {
                 const row = table.insertRow();
-                row.onclick = () => window.location.href = "./display.html?currency=" + currencyName;
+                row.onclick = () => {
+                  window.location.href = "./display.html";
+                  localStorage.setItem("currency", currencyName.toLowerCase());
+                };
                 const nameCell = row.insertCell(0);
                 const priceCell = row.insertCell(1);
                 const highCell = row.insertCell(2);
@@ -50,6 +52,6 @@
         .catch(error => {
             console.error('Error fetching data:', error);
         });
-</script>
+    </script>
 </body>
 </html>
