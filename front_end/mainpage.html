@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Information</title>
+    <link rel="stylesheet" href="mainpage.css">
+</head>
+<nav class="navbar">
+    <a href="#" class="website-name">Trading System</a>
+    <a href="trading.html">Trade</a>
+    <a href="profile.html">Profile</a>
+    <a href="signin.html">Sign In</a>
+    <a href="signup.html">Sign Up</a>
+</nav>
+    <table id="currency-table">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Today's High</th>
+            <th>Today's Low</th>
+        </tr>
+    </table>
+    <footer class="footer">
+        <a href="#">Cloud Computing 6998 Project</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const apiUrl = "https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/index";
+        const table = document.getElementById('currency-table');
+        axios.get(apiUrl)
+        .then(response => {
+            const currencyData = response.data.rates;
+            Object.entries(currencyData).forEach(([currencyName, currency]) => {
+                const row = table.insertRow();
+                row.onclick = () => {
+                  window.location.href = "./display.html";
+                  localStorage.setItem("currency", currencyName.toLowerCase());
+                };
+                const nameCell = row.insertCell(0);
+                const priceCell = row.insertCell(1);
+                const highCell = row.insertCell(2);
+                const lowCell = row.insertCell(3);
+
+                nameCell.innerHTML = currencyName;
+                priceCell.innerHTML = parseFloat(currency.rate).toFixed(5);
+                highCell.innerHTML = parseFloat(currency.highest).toFixed(5);
+                lowCell.innerHTML = parseFloat(currency.lowest).toFixed(5);
+
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    </script>
+</body>
+</html>

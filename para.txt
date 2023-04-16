@@ -1,0 +1,157 @@
+Display:
+url: https://jks1yxo910.execute-api.us-east-1.amazonaws.com/demo/display?start_time=2023-04-03 02:0
+method: GET
+return type: 
+{
+    "results": [
+        {
+            "forex_rate": "6.88593",
+            "update_time": "2023-04-03 02:08:55"
+        },
+        {
+            "forex_rate": "6.88632",
+            "update_time": "2023-04-03 02:07:55"
+        }
+    ]
+}
+
+BUY:
+PUT:
+卖cny买10jpy
+https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/buy/test1@gmail.com/cny/jpy/10
+
+
+
+{
+   "Attributes": {
+       "balance": {
+           "CHF": "0",
+           "AUD": "0",
+           "HKD": "0",
+           "JPY": "1224.0",
+           "EUR": "0",
+           "GBP": "0",
+           "USD": "19844.400075839858",
+           "CAD": "0",
+           "CNY": "1007.7960005926361"
+       }
+   },
+   "ResponseMetadata": {
+       "RequestId": "OIE1GE1BQ0IADVQ4ILTBFVVO53VV4KQNSO5AEMVJF66Q9ASUAAJG",
+       "HTTPStatusCode": 200,
+       "HTTPHeaders": {
+           "server": "Server",
+           "date": "Tue, 11 Apr 2023 19:34:00 GMT",
+           "content-type": "application/x-amz-json-1.0",
+           "content-length": "217",
+           "connection": "keep-alive",
+           "x-amzn-requestid": "OIE1GE1BQ0IADVQ4ILTBFVVO53VV4KQNSO5AEMVJF66Q9ASUAAJG",
+           "x-amz-crc32": "1695975859"
+       },
+       "RetryAttempts": 0
+   }
+}
+
+
+
+
+INDEX:
+GET:
+https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/index
+
+{
+   "rates": {
+       "CHF": {
+           "rate": "0.90319",
+           "highest": "0.90904",
+           "lowest": "0.90245"
+       },
+       "AUD": {
+           "rate": "1.5034",
+           "highest": "1.50514",
+           "lowest": "1.49672"
+       },
+       "HKD": {
+           "rate": "7.84896",
+           "highest": "7.85309",
+           "lowest": "7.8392"
+       },
+       "JPY": {
+           "rate": "133.68076",
+           "highest": "133.80776",
+           "lowest": "132.95222"
+       },
+       "EUR": {
+           "rate": "0.91625",
+           "highest": "0.92025",
+           "lowest": "0.9148"
+       },
+       "GBP": {
+           "rate": "0.80485",
+           "highest": "0.80728",
+           "lowest": "0.80291"
+       },
+       "CAD": {
+           "rate": "1.34619",
+           "highest": "1.35149",
+           "lowest": "1.34565"
+       },
+       "CNY": {
+           "rate": "6.88154",
+           "highest": "6.89098",
+           "lowest": "6.8663"
+       }
+   },
+   "update_time": "2023-04-11 21:41:58",
+   "base": "USD"
+}
+
+Display:
+GET:
+https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/display/jpy?start_time=2023-04-11 13:0
+{
+   "results": [
+       {
+           "forex_rate": "133.10136",
+           "update_time": "2023-04-11 13:00:18"
+       },
+       {
+           "forex_rate": "133.15119",
+           "update_time": "2023-04-11 13:09:17"
+       },
+       {
+           "forex_rate": "133.092",
+           "update_time": "2023-04-11 13:01:18"
+       },
+       {
+           "forex_rate": "133.11632",
+           "update_time": "2023-04-11 13:07:15"
+       },
+       {
+           "forex_rate": "133.11341",
+           "update_time": "2023-04-11 13:03:19"
+       },
+       {
+           "forex_rate": "133.07962",
+           "update_time": "2023-04-11 13:06:15"
+       },
+       {
+           "forex_rate": "133.10859",
+           "update_time": "2023-04-11 13:05:17"
+       },
+       {
+           "forex_rate": "133.09281",
+           "update_time": "2023-04-11 13:02:19"
+       },
+       {
+           "forex_rate": "133.18013",
+           "update_time": "2023-04-11 13:08:18"
+       },
+       {
+           "forex_rate": "133.13698",
+           "update_time": "2023-04-11 13:04:19"
+       }
+   ]
+}
+
+
