@@ -78,7 +78,11 @@
     </footer>
 
     <script>
-      const userEmail = "test1@gmail.com";
+      var userEmail = "test1@gmail.com";
+      if (localStorage.getItem('userEmail')) {
+    // 如果存在，则将其值赋给'user'变量
+    user = localStorage.getItem('userEmail');
+} 
 const fromCurrencySelect = document.getElementById("fromCurrency");
 const toCurrencySelect = document.getElementById("toCurrency");
 const fromAmountInput = document.getElementById("fromAmount");

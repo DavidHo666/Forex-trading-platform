@@ -7,8 +7,13 @@
     <link rel="stylesheet" href="profilecss.css">
 <script src="https://kit.fontawesome.com/3a1fba2623.js" crossorigin="anonymous"></script>
 <script>
+    var user = 'test1@gmail.com'
+    if (localStorage.getItem('userEmail')) {
+    // 如果存在，则将其值赋给'user'变量
+    user = localStorage.getItem('userEmail');
+} 
     document.addEventListener("DOMContentLoaded", function() {
-    fetch('https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/user/test1@gmail.com')
+    fetch(`https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/user/${encodeURIComponent(user)}`)
     .then(response => response.json())
     .then(data => {
     var user = {
@@ -58,7 +63,7 @@
         <div>
             <a href="trading.html">Trade</a>
             <a href="profile.html">Profile</a>
-            
+            <a href="signin.html">Log Out </a>
             <a href="sign_up.html">       </a>
         </div>
     </nav>
