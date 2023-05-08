@@ -10,6 +10,9 @@ def lambda_handler(event, context):
     table = db.Table(table)
     print(event['pathParameters'])
     key = event['pathParameters']
+    for k in key:
+        if isinstance(key[k], str) and "%40" in key[k]:
+            key[k] = key[k].replace("%40", "@")
     try:
         response = table.get_item(Key=key)
     except ClientError as e:
@@ -20,8 +23,11 @@ def lambda_handler(event, context):
         api_gateway_response = {
             'statusCode': 200,
             'headers': {
-                'Content-Type': 'application/json'
-            },
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Headers': 'Content-Type',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    },
             'body': json.dumps(res)
         }
         
