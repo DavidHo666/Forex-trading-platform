@@ -1,6 +1,8 @@
 import json
 import boto3
 from boto3.dynamodb.conditions import Key
+import csv
+from datetime import datetime, timedelta
 
 def lambda_handler(event, context):
     # TODO implement
@@ -37,7 +39,20 @@ def lambda_handler(event, context):
             'forex_rate': rate['results'][currency],
             'update_time': rate['update_time']
         })
-
+        
+    prediction_files=["predicted_prices.csv"]
+    s3 = boto3.client('s3')
+    all_predictions=[]
+    for file in prediction_files:
+        all_predictions += list(csv.reader(s3.get_object(Bucket='forecast-data-6998', Key=file)['Body'].read().decode('utf-8').split('\n')))[1:-1]
+    print(all_predictions)
+    predictions=[]
+    for money, time, p5 in all_predictions:
+        money = money.upper()
+        time = time[:10]
+        if money == currency and datetime.strptime(time, "%Y-%m-%d")>datetime.now():
+            predictions.append([currency, time, p5])
+    print(predictions)
     resp = {
         'statusCode': 200,
         'headers': {
@@ -46,7 +61,7 @@ def lambda_handler(event, context):
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
         },
-        'body': json.dumps({'results': res})
+        'body': json.dumps({'results': res, 'predictions': predictions})
     }
     
     return resp
