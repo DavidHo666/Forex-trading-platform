@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        async function submitForm(event) {
+            console.log('start');
+            //event.preventDefault();
+            const username = document.getElementById('username').value;
+            const url = `https://jks1yxo910.execute-api.us-east-1.amazonaws.com/test-user/user/${encodeURIComponent(username)}`;
+            console.log(url)
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const data = await response.json();
+                console.log(data);
+                if (data && data.email) {
+                    localStorage.setItem('userEmail', data.email);
+                    window.location.href = './display.html';
+                    console.log(data);
+                } else {
+                    alert('Invalid credentials or server error. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                alert('Server error. Please try again.');
+            }
+        }
+    </script>
+    
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
@@ -79,7 +111,7 @@
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Sign In</button>
+            <button type="submit" onclick="submitForm()">Sign In</button>
         </form>
     </div>
     <footer class="footer">
